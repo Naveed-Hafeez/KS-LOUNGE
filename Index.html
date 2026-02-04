@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS Lounge - Countdown Sports Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Montserrat',sans-serif;background:#0b0b0d;color:#fff;}
+
+/* Header */
+header{
+  background:linear-gradient(90deg,#1a1a1a,#0b0b0d);
+  text-align:center;
+  padding:25px;
+  border-bottom:3px solid #FFD700;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 0 20px rgba(255,215,0,0.3);
+}
+header h1{
+  font-size:36px;
+  color:#FFD700;
+  text-shadow:0 0 15px #FFD700,0 0 30px #ffcc00;
+}
+
+/* Navigation buttons */
+nav{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+nav button{
+  background:linear-gradient(145deg,#222,#111);
+  color:#fff;
+  border:2px solid #FFD700;
+  padding:10px 25px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+  transition:0.3s;
+  box-shadow:0 0 10px rgba(255,215,0,0.5);
+}
+nav button.active,
+nav button:hover{
+  background:linear-gradient(145deg,#FFD700,#ffcc00);
+  color:#0b0b0d;
+  box-shadow:0 0 20px #FFD700,0 0 40px #ffcc00;
+  text-shadow:0 0 5px #fff;
+}
+
+/* Hero section */
+.hero{
+  height:60vh;
+  background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1606795875741-2c31bbf8dbd3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#FFD700;
+  flex-direction:column;
+  text-align:center;
+}
+.hero h2{
+  font-size:48px;
+  text-shadow:0 0 15px #FFD700,0 0 30px #ffcc00;
+  margin-bottom:20px;
+}
+
+/* Shimmer Join Button */
+.hero a{
+  font-size:24px;
+  font-weight:700;
+  background:linear-gradient(90deg,#FFD700,#ffcc00);
+  padding:12px 30px;
+  border-radius:25px;
+  color:#0b0b0d;
+  text-decoration:none;
+  box-shadow:0 0 20px #FFD700,0 0 40px #ffcc00;
+  transition:0.3s;
+  position:relative;
+  overflow:hidden;
+  display:inline-block;
+}
+.hero a::before {
+  content:'';
+  position:absolute;
+  top:0; left:-75%;
+  width:50%; height:100%;
+  background:linear-gradient(120deg,rgba(255,255,255,0.5),rgba(255,255,255,0));
+  transform:skewX(-25deg);
+  transition:0.5s;
+}
+.hero a:hover::before {
+  left:125%;
+  transition:0.5s;
+}
+.hero a:hover{
+  background:linear-gradient(90deg,#ffcc00,#FFD700);
+  transform:scale(1.05);
+  box-shadow:0 0 30px #FFD700,0 0 60px #ffcc00,text-shadow:0 0 5px #fff;
+}
+
+/* Sections */
+section{
+  padding:60px 40px;
+  max-width:1100px;
+  margin:auto;
+}
+section h2{
+  font-size:42px;
+  color:#FFD700;
+  text-align:center;
+  margin-bottom:30px;
+  text-shadow:0 0 10px #FFD700;
+}
+
+/* Event Cards */
+.events{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.event-card{
+  background:linear-gradient(145deg,#1a1a1a,#0b0b0d);
+  padding:20px;
+  border-radius:15px;
+  border-left:6px solid #FFD700;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  transition:0.4s;
+  box-shadow:0 0 10px rgba(255,215,0,0.2);
+}
+.event-card:hover{
+  box-shadow:0 0 20px #FFD700,0 0 40px #ffcc00;
+  transform:translateY(-5px);
+}
+.event-info{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+.event-info img{
+  width:50px;
+  height:50px;
+  object-fit:contain;
+  border-radius:8px;
+  background:#222;
+  padding:3px;
+  box-shadow:0 0 10px #FFD700;
+}
+.event-info h3{
+  color:#FFD700;
+  margin:0;
+  text-shadow:0 0 5px #FFD700;
+}
+.event-info p{
+  color:#ddd;
+  font-size:15px;
+  margin-top:3px;
+}
+.countdown-badge{
+  font-weight:bold;
+  color:#FFD700;
+  background:linear-gradient(145deg,#222,#111);
+  border:2px solid #FFD700;
+  padding:8px 15px;
+  border-radius:25px;
+  font-size:15px;
+  min-width:140px;
+  text-align:center;
+  box-shadow:0 0 15px #FFD700;
+}
+
+/* Footer */
+footer{
+  padding:25px;
+  text-align:center;
+  color:#ccc;
+  border-top:2px solid #FFD700;
+  box-shadow:0 -2px 15px rgba(255,215,0,0.2);
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .event-card{flex-direction:column;text-align:center;gap:15px;}
+  .event-info{flex-direction:column;}
+  .hero h2{font-size:36px;}
+  .hero a{font-size:20px;padding:10px 25px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>KS Lounge</h1>
+<nav id="filters">
+  <button class="active" onclick="filterEvents('All')">All</button>
+  <button onclick="filterEvents('UFC')">UFC</button>
+  <button onclick="filterEvents('WWE')">WWE</button>
+  <button onclick="filterEvents('AEW')">AEW</button>
+</nav>
+</header>
+
+<section class="hero">
+  <h2>Live Countdown Sports Events</h2>
+</section>
+
+<section id="events-section">
+  <h2>Upcoming Events</h2>
+  <div class="events" id="events-list"></div>
+</section>
+
+<footer>&copy; 2026 KS Lounge</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
+<script>
+// Logos URLs
+const logos = {
+  "UFC":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UFC_Logo.svg/2560px-UFC_Logo.svg.png",
+  "WWE":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/WWE_official_logo.svg/2560px-WWE_official_logo.svg.png",
+  "AEW":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/All_Elite_Wrestling_logo_2024.svg/2560px-All_Elite_Wrestling_logo_2024.svg.png"
+};
+
+// Manual WWE/AEW events
+const manual = [
+   { name:"WWE WWE Elimination Chamber", date:"2026-02-28T01:00:00Z", category:"WWE", location:"Chicago, Illinois, USA" },
+  { name:"WWE WrestleMania 42 Night 1", date:"2026-04-18T01:00:00Z", category:"WWE", location:"Las Vegas, USA" },
+  { name:"WWE WrestleMania 42 Night 2", date:"2026-04-19T01:00:00Z", category:"WWE", location:"Las Vegas, USA" },
+  { name:"WWE Backlash", date:"2026-05-09T01:00:00Z", category:"WWE", location:"Tampa, FloridaA" },
+  { name:"WWE SummerSlam 2026", date:"2026-08-01T00:00:00Z", category:"WWE", location:"Minneapolis, USA" },
+  { name:"AEW Revolution", date:"2026-03-15T00:00:00Z", category:"AEW", location:"Los Angeles, USA" },
+  { name:"AEW All In 2026", date:"2026-08-30T00:00:00Z", category:"AEW", location:"London, UK" }
+];
+
+let events = [];
+let filtered = "All";
+
+// Load UFC GitHub iCal
+async function loadUFC(){
+  try {
+    const res = await fetch("https://raw.githubusercontent.com/clarencechaan/ufc-cal/ics/UFC.ics");
+    const text = await res.text();
+    const jcal = ICAL.parse(text);
+    const comp = new ICAL.Component(jcal);
+    comp.getAllSubcomponents("vevent").forEach(ev=>{
+      const e = new ICAL.Event(ev);
+      const d = e.startDate.toJSDate();
+      if(d > new Date()){
+        events.push({
+          name:e.summary,
+          date:d.toISOString(),
+          category:"UFC",
+          location:e.location || "TBA"
+        });
+      }
+    });
+  } catch(e){
+    console.error("UFC load failed:",e);
+  }
+
+  events.push(...manual);
+  renderEvents();
+}
+
+function renderEvents(){
+  const list = document.getElementById("events-list");
+  list.innerHTML = "";
+  events.sort((a,b)=>new Date(a.date)-new Date(b.date))
+        .forEach(ev=>{
+          if(filtered==="All"||ev.category===filtered){
+            const d=new Date(ev.date);
+            const card=document.createElement("div");
+            card.className="event-card";
+            card.innerHTML=`
+              <div class="event-info">
+                <img src="${logos[ev.category]}" alt="${ev.category} Logo">
+                <div>
+                  <h3>${ev.name}</h3>
+                  <p>${ev.category} • ${ev.location} • ${d.toUTCString()}</p>
+                </div>
+              </div>
+              <div class="countdown-badge" id="cd-${ev.name.replace(/\s+/g,'')}"></div>
+            `;
+            list.appendChild(card);
+            startCountdown(d,`cd-${ev.name.replace(/\s+/g,'')}`);
+          }
+        });
+}
+
+function startCountdown(t, id){
+  const el=document.getElementById(id);
+  function upd(){
+    const now=new Date();
+    const diff=t-now;
+    if(diff<=0){ el.textContent="Live Now!"; return; }
+    const dd=Math.floor(diff/(1000*60*60*24));
+    const hh=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const mm=Math.floor((diff%(1000*60*60))/(1000*60));
+    const ss=Math.floor((diff%(1000*60))/1000);
+    el.textContent=`${dd}d ${hh}h ${mm}m ${ss}s`;
+  }
+  upd(); setInterval(upd,1000);
+}
+
+function filterEvents(cat){
+  filtered=cat;
+  document.querySelectorAll("#filters button")
+          .forEach(b=>b.classList.toggle("active",b.textContent===cat));
+  renderEvents();
+}
+
+loadUFC();
+</script>
+
+</body>
+</html>
